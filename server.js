@@ -4,7 +4,7 @@
 // if it's an object property, you can change it.
 const express = require('express');
 const app = express();
-const questionsController = require(process.env.PWD + '/controllers/questionsController.js');
+const kudosController = require(process.env.PWD + '/controllers/kudosController.js');
 
 app.engine('.html', require('ejs').__express); // parses the html files like erb.
 app.set('views',__dirname + '/build'); // where to look for views.
@@ -26,7 +26,7 @@ app.get('/', renderMainTemplate); // renderMainTemplate is called middleware
 // what does middleware look like?
 
 // ROUTES FOR JSON
-app.get('/api/v1/questions', questionsController.fetchQuestions);
+app.get('/api/v1/kudos', kudosController.fetchKudos);
 
 // LISTEN FOR A PORT
 app.listen(9393);

@@ -1,13 +1,14 @@
 {
-  "name": "Queval",
+  "name": "Kudos",
   "version": "0.1.0",
-  "description": "Creating an app to evaluate questions for syntax, professionalism and better communication.",
+  "description": "A way to give kudos to someone.",
   "main": "server.js",
   "scipts": {
     "start": "node server.js"
   },
   "dependencies": {
     "ejs": "^2.5.1",
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "pg": "^6.1.0"
   }
 }
