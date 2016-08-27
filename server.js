@@ -4,6 +4,10 @@
 // if it's an object property, you can change it.
 const express = require('express');
 const app = express();
+
+require('babel-core/register');
+require('babel-polyfill');
+
 const kudosController = require(process.env.PWD + '/controllers/kudosController.js');
 
 app.engine('.html', require('ejs').__express); // parses the html files like erb.
@@ -31,3 +35,5 @@ app.get('/api/v1/kudos', kudosController.fetchKudos);
 
 // LISTEN FOR A PORT
 app.listen(9393);
+
+console.log("App is running on the port 9393");

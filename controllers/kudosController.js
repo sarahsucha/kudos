@@ -1,14 +1,3 @@
-const pg = require('pg');
-
-const config = {
- host: 'localhost',
- port: 5432,
- database: 'kudos',
- user: 'postgres',
- password: '',
- ssl: false,
-};
-
 class KudosController {
   fetchKudos(req, res) { // this is an anonymous function in egmascript 6
     const kudos = [
