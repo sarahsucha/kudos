@@ -27,6 +27,7 @@ function renderMainTemplate(req, res) {
 
 // ROUTES FOR HTML
 app.get('/', renderMainTemplate); // renderMainTemplate is called middleware
+app.get('/kudos', renderMainTemplate); // renderMainTemplate is called middleware
 // that will be a function
 // what does middleware look like?
 
