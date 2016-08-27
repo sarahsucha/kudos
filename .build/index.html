@@ -3,10 +3,32 @@
   <head>
     <meta charset="utf-8">
     <title>Kudos</title>
+    <link href="https://fonts.googleapis.com/css?family=BioRhyme|Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/styles/main.css">
   </head>
   <body>
-    <h1>KUDOS</h1>
+    <nav class="navBar">
+      <nav class="wrapper">
+        <div class="logo">kudos</div>
+        <ul>
+            <a href="#"><li>Latest Kudos</li></a>
+            <a href="#"><li>Most Popular Kudos</li></a>
+            <a href="#"><li>All Kudos</li></a>
+        </ul>
+      </nav>
+    </nav>
+    <div class="main" id="latestKudos">
+      <h2>LATEST KUDOS</h2>
+      <ul>
+          <li>A latest kudos will go in here</li>
+      </ul>
+    </div>
+    <div class="main newKudo" id="newKudoForm">
+      <h2>ADD A KUDO</h2>
+
+    </div>
     <div id="main"><%- reactHtml %></div>
-    <script src="js/bundle.js"></script>
+
+    <script src="/js/bundle.js"></script>
   </body>
 </html>

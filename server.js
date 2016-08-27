@@ -9,8 +9,9 @@ const kudosController = require(process.env.PWD + '/controllers/kudosController.
 app.engine('.html', require('ejs').__express); // parses the html files like erb.
 app.set('views',__dirname + '/.build'); // where to look for views.
 app.set('view engine', 'html'); // the default engine to use.
+app.use(express.static(process.cwd() + '/.build'));// MIDDLEWARE if for example, '/js/bundle.js' url then use static build folder to load stuff.
+// Static build folder - static files - never change
 
-// MIDDLEWARE
 // request, response, next
 // next can come later
 // fourth can be error - (error, req, res, next) - it's a middleware for handling errors
