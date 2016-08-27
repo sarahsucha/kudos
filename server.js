@@ -7,7 +7,7 @@ const app = express();
 const kudosController = require(process.env.PWD + '/controllers/kudosController.js');
 
 app.engine('.html', require('ejs').__express); // parses the html files like erb.
-app.set('views',__dirname + '/build'); // where to look for views.
+app.set('views',__dirname + '/.build'); // where to look for views.
 app.set('view engine', 'html'); // the default engine to use.
 
 // MIDDLEWARE
