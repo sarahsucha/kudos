@@ -5,7 +5,9 @@ const KudosListPresentational = (props) => {
     <div className="main" id="latestKudos">
       <h2>latest kudos</h2>
       <ul>
-          <li>A latest kudos will go in here</li>
+          {props.kudos.map((kudo, key) => {
+            return <li key={key}>{kudo.description}</li>
+          })}
       </ul>
     </div>
   );

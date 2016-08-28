@@ -4,6 +4,7 @@
 // if it's an object property, you can change it.
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser');
 
 require('babel-core/register');
 require('babel-polyfill');
@@ -14,6 +15,8 @@ app.engine('.html', require('ejs').__express); // parses the html files like erb
 app.set('views',__dirname + '/.build'); // where to look for views.
 app.set('view engine', 'html'); // the default engine to use.
 app.use(express.static(process.cwd() + '/.build'));// MIDDLEWARE if for example, '/js/bundle.js' url then use static build folder to load stuff.
+app.use(bodyParser.urlencoded());
+app.use(bodyParser.json());
 // Static build folder - static files - never change
 
 // request, response, next
@@ -32,7 +35,7 @@ app.get('/kudos', renderMainTemplate); // renderMainTemplate is called middlewar
 // what does middleware look like?
 
 // ROUTES FOR JSON
-app.get('/api/kudos', kudosController.fetchKudos);
+app.get('/api/kudos', kudosController.findKudos);
 app.post('/api/kudos', kudosController.createKudo);
 
 // LISTEN FOR A PORT

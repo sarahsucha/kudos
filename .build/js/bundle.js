@@ -27215,9 +27215,13 @@
 
 	var _KudoFormContainer2 = _interopRequireDefault(_KudoFormContainer);
 
-	var _KudosListPresentational = __webpack_require__(240);
+	var _KudosListPresentational = __webpack_require__(245);
 
 	var _KudosListPresentational2 = _interopRequireDefault(_KudosListPresentational);
+
+	var _KudosService = __webpack_require__(239);
+
+	var _KudosService2 = _interopRequireDefault(_KudosService);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -27234,19 +27238,35 @@
 	var KudosListPage = function (_Component) {
 	  _inherits(KudosListPage, _Component);
 
-	  function KudosListPage() {
+	  function KudosListPage(props) {
 	    _classCallCheck(this, KudosListPage);
 
-	    return _possibleConstructorReturn(this, (KudosListPage.__proto__ || Object.getPrototypeOf(KudosListPage)).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, (KudosListPage.__proto__ || Object.getPrototypeOf(KudosListPage)).call(this, props));
+
+	    _this.state = {
+	      kudos: []
+	    };
+	    return _this;
 	  }
 
 	  _createClass(KudosListPage, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var _this2 = this;
+
+	      new _KudosService2.default().findKudos().then(function (kudos) {
+	        console.log('----------------componentDidMount----------------------------');
+	        console.log(JSON.stringify(kudos, null, 4));
+	        _this2.setState({ kudos: kudos });
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_KudosListPresentational2.default, null),
+	        _react2.default.createElement(_KudosListPresentational2.default, { kudos: this.state.kudos }),
 	        _react2.default.createElement(_KudoFormContainer2.default, null)
 	      );
 	    }
@@ -27301,9 +27321,9 @@
 	    };
 
 	    _this.state = {
-	      from: '',
-	      to: '',
-	      kudo: ''
+	      name_from: '',
+	      name_to: '',
+	      description: ''
 	    };
 	    _this.kudosService = new _KudosService2.default();
 	    return _this;
@@ -27316,48 +27336,52 @@
 
 	      console.log('-----------------RENDER---------------------------');
 	      console.log(this.state);
-	      // const { from, to, kudo } = this.state;
+	      var _state = this.state;
+	      var name_from = _state.name_from;
+	      var name_to = _state.name_to;
+	      var description = _state.description;
 	      // THe line above is equivalent of this:
-	      // const from = this.state.from;
-	      // const to = this.state.to;
-	      // const kudo = this.state.kudo;
+	      // const name_from = this.state.name_from;
+	      // const name_to = this.state.name_to;
+	      // const description = this.state.description;
+
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'main newKudo', id: 'newKudoForm' },
 	        _react2.default.createElement(
 	          'h2',
 	          null,
-	          'add a kudo'
+	          'add a description'
 	        ),
 	        _react2.default.createElement(
 	          'form',
 	          { action: '/api/kudos', method: 'POST', onSubmit: this.handleSubmit },
 	          _react2.default.createElement(
 	            'label',
-	            { htmlFor: 'from' },
+	            { htmlFor: 'name_from' },
 	            'From:'
 	          ),
-	          _react2.default.createElement('input', { type: 'text', name: 'from', id: 'from', required: true, value: this.state.from,
+	          _react2.default.createElement('input', { type: 'text', name: 'name_from', id: 'name_from', required: true, value: name_from,
 	            onChange: function onChange(e) {
-	              _this2.setState({ from: e.target.value });
+	              _this2.setState({ name_from: e.target.value });
 	            } }),
 	          _react2.default.createElement(
 	            'label',
-	            { htmlFor: 'to' },
+	            { htmlFor: 'name_to' },
 	            'To:'
 	          ),
-	          _react2.default.createElement('input', { type: 'text', name: 'to', id: 'to', required: true, value: this.state.to,
+	          _react2.default.createElement('input', { type: 'text', name: 'name_to', id: 'name_to', required: true, value: name_to,
 	            onChange: function onChange(e) {
-	              _this2.setState({ to: e.target.value });
+	              _this2.setState({ name_to: e.target.value });
 	            } }),
 	          _react2.default.createElement(
 	            'label',
-	            { htmlFor: 'kudo' },
+	            { htmlFor: 'description' },
 	            'Kudo:'
 	          ),
-	          _react2.default.createElement('textarea', { name: 'kudo', id: 'kudo', required: true, value: this.state.kudo,
+	          _react2.default.createElement('textarea', { name: 'description', id: 'description', required: true, value: description,
 	            onChange: function onChange(e) {
-	              _this2.setState({ kudo: e.target.value });
+	              _this2.setState({ description: e.target.value });
 	            } }),
 	          _react2.default.createElement('input', { type: 'submit', value: 'Save' })
 	        )
@@ -27384,7 +27408,7 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _superagent = __webpack_require__(241);
+	var _superagent = __webpack_require__(240);
 
 	var _superagent2 = _interopRequireDefault(_superagent);
 
@@ -27408,6 +27432,18 @@
 	        }
 	      });
 	    }
+	  }, {
+	    key: 'findKudos',
+	    value: function findKudos() {
+	      var searchParams = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+
+	      return new Promise(function (resolve, reject) {
+	        _superagent2.default.get('/api/kudos').query(searchParams).set('Accept', 'application/json').end(function (err, res) {
+	          if (err) return reject(err);
+	          resolve(res.body);
+	        });
+	      });
+	    }
 	  }]);
 
 	  return KudosService;
@@ -27417,47 +27453,6 @@
 
 /***/ },
 /* 240 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	//don't need Component because in presentation use stateless function componenets. which only return uah html and is equivalent of the render function in react componenets
-
-	var KudosListPresentational = function KudosListPresentational(props) {
-	  return _react2.default.createElement(
-	    "div",
-	    { className: "main", id: "latestKudos" },
-	    _react2.default.createElement(
-	      "h2",
-	      null,
-	      "latest kudos"
-	    ),
-	    _react2.default.createElement(
-	      "ul",
-	      null,
-	      _react2.default.createElement(
-	        "li",
-	        null,
-	        "A latest kudos will go in here"
-	      )
-	    )
-	  );
-	};
-
-	exports.default = KudosListPresentational;
-
-/***/ },
-/* 241 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -27474,9 +27469,9 @@
 	  root = this;
 	}
 
-	var Emitter = __webpack_require__(242);
-	var requestBase = __webpack_require__(243);
-	var isObject = __webpack_require__(244);
+	var Emitter = __webpack_require__(241);
+	var requestBase = __webpack_require__(242);
+	var isObject = __webpack_require__(243);
 
 	/**
 	 * Noop.
@@ -27488,7 +27483,7 @@
 	 * Expose `request`.
 	 */
 
-	var request = module.exports = __webpack_require__(245).bind(null, Request);
+	var request = module.exports = __webpack_require__(244).bind(null, Request);
 
 	/**
 	 * Determine XHR.
@@ -28439,7 +28434,7 @@
 
 
 /***/ },
-/* 242 */
+/* 241 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -28608,13 +28603,13 @@
 
 
 /***/ },
-/* 243 */
+/* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Module of mixed-in functions shared between node and client code
 	 */
-	var isObject = __webpack_require__(244);
+	var isObject = __webpack_require__(243);
 
 	/**
 	 * Clear previous timeout.
@@ -28961,7 +28956,7 @@
 
 
 /***/ },
-/* 244 */
+/* 243 */
 /***/ function(module, exports) {
 
 	/**
@@ -28980,7 +28975,7 @@
 
 
 /***/ },
-/* 245 */
+/* 244 */
 /***/ function(module, exports) {
 
 	// The node and browser modules expose versions of this with the
@@ -29016,6 +29011,49 @@
 
 	module.exports = request;
 
+
+/***/ },
+/* 245 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	//don't need Component because in presentation use stateless function componenets. which only return uah html and is equivalent of the render function in react componenets
+
+	var KudosListPresentational = function KudosListPresentational(props) {
+	  return _react2.default.createElement(
+	    "div",
+	    { className: "main", id: "latestKudos" },
+	    _react2.default.createElement(
+	      "h2",
+	      null,
+	      "latest kudos"
+	    ),
+	    _react2.default.createElement(
+	      "ul",
+	      null,
+	      props.kudos.map(function (kudo, key) {
+	        return _react2.default.createElement(
+	          "li",
+	          { key: key },
+	          kudo.description
+	        );
+	      })
+	    )
+	  );
+	};
+
+	exports.default = KudosListPresentational;
 
 /***/ }
 /******/ ]);
