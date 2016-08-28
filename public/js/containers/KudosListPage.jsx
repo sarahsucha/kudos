@@ -10,7 +10,7 @@ import KudosListPresentational from '../presentational/KudosListPresentational.j
 class KudosListPage extends Component {
   render() {
     return (
-      <div>Kudos List Page</div>
+      <KudosListPresentational />
     );
   }
 }

@@ -27127,6 +27127,14 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _KudoFormContainer = __webpack_require__(237);
+
+	var _KudoFormContainer2 = _interopRequireDefault(_KudoFormContainer);
+
+	var _KudosListPresentational = __webpack_require__(238);
+
+	var _KudosListPresentational2 = _interopRequireDefault(_KudosListPresentational);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -27134,6 +27142,10 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	// Usage
+	// <KudoFormContainer />
+	// <KudosListPresentational kudos={kudos} />
 
 	var KudosListPage = function (_Component) {
 	  _inherits(KudosListPage, _Component);
@@ -27147,11 +27159,7 @@
 	  _createClass(KudosListPage, [{
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        'Kudos List Page'
-	      );
+	      return _react2.default.createElement(_KudosListPresentational2.default, null);
 	    }
 	  }]);
 
@@ -27159,6 +27167,53 @@
 	}(_react.Component);
 
 	exports.default = KudosListPage;
+
+/***/ },
+/* 237 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+/***/ },
+/* 238 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	//don't need Component because in presentation use stateless function componenets. which only return uah html and is equivalent of the render function in react componenets
+
+	var KudosListPresentational = function KudosListPresentational(props) {
+	  return _react2.default.createElement(
+	    "div",
+	    { className: "main", id: "latestKudos" },
+	    _react2.default.createElement(
+	      "h2",
+	      null,
+	      "latest kudos"
+	    ),
+	    _react2.default.createElement(
+	      "ul",
+	      null,
+	      _react2.default.createElement(
+	        "li",
+	        null,
+	        "A latest kudos will go in here"
+	      )
+	    )
+	  );
+	};
+
+	exports.default = KudosListPresentational;
 
 /***/ }
 /******/ ]);
