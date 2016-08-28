@@ -63,3 +63,46 @@ nav a:hover {
   font-family: 'BioRhyme', serif;
   font-size: 3em;
 }
+
+#menu-toggle {
+  display: none;
+}
+
+/*.lable-toggle {
+  display: none;
+}*/
+
+@media (max-width: 768px) {
+  ul {
+    background-color: #E84545;
+    display: block;
+    height: 0;
+    list-style-type: none;
+    opacity: 0;
+    text-align: center;
+    transition: all ls ease;
+    width: 100%;
+    visibility: hidden;
+  }
+  li {
+    border-bottom: 2px solid #53354A;
+    color: #53354A;
+    display: block;
+    font-size: 1.5em;
+    padding: 2em 0;
+  }
+  #menu-toggle:checked ~ ul {
+    opacity: 1;
+    height: 100vh;
+    visibility: visible;
+  }
+  /*.label-toggle {
+  background: linear-gradient(to bottom, $color1 0%, $color1 20%, transparent 20%, transparent 40%, $color1 40%, $color1 60%, transparent 60%, transparent 80%, $color1 80%, $color1 100%); //Gradient Hamburger
+  cursor: pointer;
+  display: block;
+  float: right;
+  height: 35px;
+  margin-top: 1em;
+  width: 35px;
+  }*/
+}
