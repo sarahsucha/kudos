@@ -1,5 +1,7 @@
+const KudosService = require('../services/KudosService');
+
 class KudosController {
-  fetchKudos(req, res) { // this is an anonymous function in egmascript 6
+  fetchKudos(req, res, next) { // this is an anonymous function in egmascript 6
     const kudos = [
       {
         name_from: 'Sarah',
@@ -15,6 +17,14 @@ class KudosController {
       }
     ];
     res.json(kudos);
+  },
+  async createKudo(req, res, next) {
+    try {
+      const kudo = await new KudosService().createKudo(req.body);
+      res.status(201).send(kudo); // It sets HTTP status to 201 and returns JSON.
+    } catch (err) {
+      next(err);
+    }
   }
 };
 

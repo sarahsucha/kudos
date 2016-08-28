@@ -32,7 +32,8 @@ app.get('/kudos', renderMainTemplate); // renderMainTemplate is called middlewar
 // what does middleware look like?
 
 // ROUTES FOR JSON
-app.get('/api/v1/kudos', kudosController.fetchKudos);
+app.get('/api/kudos', kudosController.fetchKudos);
+app.post('/api/kudos', kudosController.createKudo);
 
 // LISTEN FOR A PORT
 app.listen(9393);
