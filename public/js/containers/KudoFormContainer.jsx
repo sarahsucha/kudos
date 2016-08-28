@@ -12,23 +12,37 @@ class KudoFormContainer extends Component {
     };
     this.kudosService = new KudosService();
   }
+
+  // It's called after the form is submitted.
   handleSubmit = (e) => {
     const { findKudos } = this.props;
-    console.log('handleSubmit');
+
+    // Without this it would do a regular POST call, not AJAX.
+    // e.preventDefault() prevents default processing of the form.
     e.preventDefault();
+
+    // Takes the actual state (kudo form) and sends it to the server.
     this.kudosService.postKudo(this.state)
       .then((kudo) => {
-        findKudos();
+        findKudos(); // Refreshes kudos after a new kudo was added.
       })
   }
+
   render() {
-    console.log('-----------------RENDER---------------------------');
+    console.log('-----------------RENDER KUDO FORM---------------------------');
     console.log(this.state);
-    const { name_from, name_to, description } = this.state;
-    // THe line above is equivalent of this:
+
+    // The line below is equivalent of this:
     // const name_from = this.state.name_from;
     // const name_to = this.state.name_to;
     // const description = this.state.description;
+    const { name_from, name_to, description } = this.state;
+
+    // this.setState({name_from: e.target.value})} is called every time a user
+    // changes something in the name_from input field. It saves a new value
+    // to the state of the component and everytime it happens the render()
+    // function is called again.
+
     return (
       <div className="main newKudo" id="newKudoForm">
         <h2>add a description</h2>

@@ -14,5 +14,6 @@ render((
   </Router>
 ), document.getElementById('main'));
 
+// TODO These routes can be used later on.
 // <Route path="kudos/edit/:kudoId" component={KudosEditPage}/>
 // <Route path="*" component={NotFoundPage}/>

@@ -1,11 +1,14 @@
 const KudosService = require('../services/KudosService');
 
 class KudosController {
-  async findKudos(req, res, next) { // this is an anonymous function in egmascript 6
+  async findKudos(req, res, next) { // this is an anonymous function in ES6.
     try {
+      // It runs async calls and return response.
       const kudos = await new KudosService().findKudos(req.query);
       res.json(kudos);
     } catch (err) {
+      // If there is any error thrown or rejected in the 'try' block, it goes here.
+      // next(err) calls a default express.js error handling middleware.
       next(err);
     }
   }

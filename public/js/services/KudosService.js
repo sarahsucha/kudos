@@ -1,5 +1,6 @@
 import superagent from 'superagent';
 
+// This service makes AJAX calls to our backend.
 export default class KudosService {
   postKudo(kudo) {
     return new Promise((resolve, reject) => {

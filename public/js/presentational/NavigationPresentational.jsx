@@ -11,10 +11,7 @@ const NavigationPresentational = (props) => {
         <span></span>
         <span></span>
         <ul>
-            <a href="#"><li>New Kudo</li></a>
-            <a href="#"><li>Latest Kudos</li></a>
-            <a href="#"><li>Most Popular Kudos</li></a>
-            <a href="#"><li>All Kudos</li></a>
+            <a href="#"><li>Login</li></a>
         </ul>
       </nav>
     </nav>

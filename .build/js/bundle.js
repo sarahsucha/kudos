@@ -75,6 +75,7 @@
 	  )
 	), document.getElementById('main'));
 
+	// TODO These routes can be used later on.
 	// <Route path="kudos/edit/:kudoId" component={KudosEditPage}/>
 	// <Route path="*" component={NotFoundPage}/>
 	// ./ means to current folder
@@ -27101,6 +27102,10 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	// This is a main component for the app, which is rendered on all pages.
+	// It's a stateless React component, just one function that returns HTML.
+	// It's an equivalent of the render() function from normal React components.
+	// { PropTypes } is equivalent to React.PropTypes
 	var App = function App(props) {
 	  return _react2.default.createElement(
 	    'div',
@@ -27110,11 +27115,13 @@
 	  );
 	};
 
+	// Every React components gets this automatic children prop by default.
+	// If you have <App><KudosListPage /></App>, then KudosListPage is your children.
 	App.propTypes = {
 	  children: _react.PropTypes.object
 	};
 
-	exports.default = App;
+	exports.default = App; // That's how you export things in the latest JavaScript (ES6).
 
 /***/ },
 /* 236 */
@@ -27158,34 +27165,7 @@
 	          _react2.default.createElement(
 	            "li",
 	            null,
-	            "New Kudo"
-	          )
-	        ),
-	        _react2.default.createElement(
-	          "a",
-	          { href: "#" },
-	          _react2.default.createElement(
-	            "li",
-	            null,
-	            "Latest Kudos"
-	          )
-	        ),
-	        _react2.default.createElement(
-	          "a",
-	          { href: "#" },
-	          _react2.default.createElement(
-	            "li",
-	            null,
-	            "Most Popular Kudos"
-	          )
-	        ),
-	        _react2.default.createElement(
-	          "a",
-	          { href: "#" },
-	          _react2.default.createElement(
-	            "li",
-	            null,
-	            "All Kudos"
+	            "Login"
 	          )
 	        )
 	      )
@@ -27231,38 +27211,44 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	// Usage
-	// <KudoFormContainer />
-	// <KudosListPresentational kudos={kudos} />
-
 	var KudosListPage = function (_Component) {
 	  _inherits(KudosListPage, _Component);
 
 	  function KudosListPage(props) {
 	    _classCallCheck(this, KudosListPage);
 
+	    // Sets a default state of the component, which is used in the render() function.
 	    var _this = _possibleConstructorReturn(this, (KudosListPage.__proto__ || Object.getPrototypeOf(KudosListPage)).call(this, props));
+	    // This passes props that were passed to this compnent to its parent constructor (Component);
+
 
 	    _this.findKudos = function () {
-	      new _KudosService2.default().findKudos().then(function (kudos) {
+	      new _KudosService2.default().findKudos() // Get kudos via AJAX call from the database.
+	      .then(function (kudos) {
+	        // Every time setState() is called, it calls the render() function again.
 	        _this.setState({ kudos: kudos });
 	      });
 	    };
 
 	    _this.onKudoDeleteClick = function (kudoId) {
-	      new _KudosService2.default().deleteKudo(kudoId).then(_this.findKudos);
+	      new _KudosService2.default().deleteKudo(kudoId).then(_this.findKudos); // Refreshes a list of kudos after a kudo was deleted.
 	    };
 
 	    _this.state = {
-	      kudos: []
+	      kudos: [] // Empty list of kudos, because we have to wait for the AJAX call response to get it.
 	    };
 	    return _this;
 	  }
 
 	  _createClass(KudosListPage, [{
 	    key: 'componentDidMount',
+
+
+	    // componentDidMount() is a lifecycle function of a regular React component.
+	    // It's called after the initial rendering is done. More here:
+	    // https://facebook.github.io/react/docs/component-specs.html
 	    value: function componentDidMount() {
-	      this.findKudos();
+	      this.findKudos(); // Make AJAX call to get kudos from the server.
 	    }
 	  }, {
 	    key: 'render',
@@ -27324,10 +27310,14 @@
 	    _this.handleSubmit = function (e) {
 	      var findKudos = _this.props.findKudos;
 
-	      console.log('handleSubmit');
+	      // Without this it would do a regular POST call, not AJAX.
+	      // e.preventDefault() prevents default processing of the form.
+
 	      e.preventDefault();
+
+	      // Takes the actual state (kudo form) and sends it to the server.
 	      _this.kudosService.postKudo(_this.state).then(function (kudo) {
-	        findKudos();
+	        findKudos(); // Refreshes kudos after a new kudo was added.
 	      });
 	    };
 
@@ -27340,21 +27330,30 @@
 	    return _this;
 	  }
 
+	  // It's called after the form is submitted.
+
+
 	  _createClass(KudoFormContainer, [{
 	    key: 'render',
 	    value: function render() {
 	      var _this2 = this;
 
-	      console.log('-----------------RENDER---------------------------');
+	      console.log('-----------------RENDER KUDO FORM---------------------------');
 	      console.log(this.state);
+
+	      // The line below is equivalent of this:
+	      // const name_from = this.state.name_from;
+	      // const name_to = this.state.name_to;
+	      // const description = this.state.description;
 	      var _state = this.state;
 	      var name_from = _state.name_from;
 	      var name_to = _state.name_to;
 	      var description = _state.description;
-	      // THe line above is equivalent of this:
-	      // const name_from = this.state.name_from;
-	      // const name_to = this.state.name_to;
-	      // const description = this.state.description;
+
+	      // this.setState({name_from: e.target.value})} is called every time a user
+	      // changes something in the name_from input field. It saves a new value
+	      // to the state of the component and everytime it happens the render()
+	      // function is called again.
 
 	      return _react2.default.createElement(
 	        'div',
@@ -27431,6 +27430,7 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+	// This service makes AJAX calls to our backend.
 	var KudosService = function () {
 	  function KudosService() {
 	    _classCallCheck(this, KudosService);
@@ -29052,8 +29052,11 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	//don't need Component because in presentation use stateless function componenets. which only return uah html and is equivalent of the render function in react componenets
-
+	// This: ({ onKudoDeleteClick, kudos }) is equivalent of this:
+	// (props), const onKudoDeleteClick = props.onKudoDeleteClick; const kudos = props.kudos;
+	// Since it's a presentational component, we don't want to make AJAX calls from here.
+	// We only want to pass properties and render them, that's it. Business logic should be
+	// handled by callbacks (e.g. onKudoDeleteClick)
 	var KudosListPresentational = function KudosListPresentational(_ref) {
 	  var onKudoDeleteClick = _ref.onKudoDeleteClick;
 	  var kudos = _ref.kudos;
@@ -29083,6 +29086,8 @@
 	  );
 	};
 
+	// propTypes are must-have, because they define API for each component, which
+	// is very useful in tests as well.
 	KudosListPresentational.propTypes = {
 	  onKudoDeleteClick: _react.PropTypes.func.isRequired,
 	  kudos: _react.PropTypes.array.isRequired
