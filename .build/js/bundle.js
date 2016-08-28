@@ -27243,6 +27243,12 @@
 
 	    var _this = _possibleConstructorReturn(this, (KudosListPage.__proto__ || Object.getPrototypeOf(KudosListPage)).call(this, props));
 
+	    _this.findKudos = function () {
+	      new _KudosService2.default().findKudos().then(function (kudos) {
+	        _this.setState({ kudos: kudos });
+	      });
+	    };
+
 	    _this.state = {
 	      kudos: []
 	    };
@@ -27252,13 +27258,7 @@
 	  _createClass(KudosListPage, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      var _this2 = this;
-
-	      new _KudosService2.default().findKudos().then(function (kudos) {
-	        console.log('----------------componentDidMount----------------------------');
-	        console.log(JSON.stringify(kudos, null, 4));
-	        _this2.setState({ kudos: kudos });
-	      });
+	      this.findKudos();
 	    }
 	  }, {
 	    key: 'render',
@@ -27267,7 +27267,7 @@
 	        'div',
 	        null,
 	        _react2.default.createElement(_KudosListPresentational2.default, { kudos: this.state.kudos }),
-	        _react2.default.createElement(_KudoFormContainer2.default, null)
+	        _react2.default.createElement(_KudoFormContainer2.default, { findKudos: this.findKudos })
 	      );
 	    }
 	  }]);
@@ -27315,9 +27315,13 @@
 	    var _this = _possibleConstructorReturn(this, (KudoFormContainer.__proto__ || Object.getPrototypeOf(KudoFormContainer)).call(this, props));
 
 	    _this.handleSubmit = function (e) {
+	      var findKudos = _this.props.findKudos;
+
 	      console.log('handleSubmit');
 	      e.preventDefault();
-	      _this.kudosService.postKudo(_this.state);
+	      _this.kudosService.postKudo(_this.state).then(function (kudo) {
+	        findKudos();
+	      });
 	    };
 
 	    _this.state = {
@@ -27394,6 +27398,10 @@
 
 	;
 
+	KudoFormContainer.propTypes = {
+	  findKudos: _react.PropTypes.func.isRequired
+	};
+
 	exports.default = KudoFormContainer;
 
 /***/ },
@@ -27424,12 +27432,11 @@
 	  _createClass(KudosService, [{
 	    key: 'postKudo',
 	    value: function postKudo(kudo) {
-	      _superagent2.default.post('/api/kudos').send(kudo).set('Accept', 'application/json').end(function (err, res) {
-	        if (err || !res.ok) {
-	          console.log('Oh no! error');
-	        } else {
-	          console.log('yay got ' + JSON.stringify(res.body));
-	        }
+	      return new Promise(function (resolve, reject) {
+	        _superagent2.default.post('/api/kudos').send(kudo).set('Accept', 'application/json').end(function (err, res) {
+	          if (err) return reject(err);
+	          resolve(res.body);
+	        });
 	      });
 	    }
 	  }, {

@@ -13,9 +13,13 @@ class KudoFormContainer extends Component {
     this.kudosService = new KudosService();
   }
   handleSubmit = (e) => {
+    const { findKudos } = this.props;
     console.log('handleSubmit');
     e.preventDefault();
-    this.kudosService.postKudo(this.state);
+    this.kudosService.postKudo(this.state)
+      .then((kudo) => {
+        findKudos();
+      })
   }
   render() {
     console.log('-----------------RENDER---------------------------');
@@ -47,5 +51,9 @@ class KudoFormContainer extends Component {
     );
   };
 };
+
+KudoFormContainer.propTypes = {
+  findKudos: PropTypes.func.isRequired,
+}
 
 export default KudoFormContainer;

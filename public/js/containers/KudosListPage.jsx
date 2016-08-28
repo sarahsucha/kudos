@@ -16,20 +16,22 @@ class KudosListPage extends Component {
     };
   }
 
-  componentDidMount() {
+  findKudos = () => {
     new KudosService().findKudos()
     .then((kudos) => {
-      console.log('----------------componentDidMount----------------------------');
-      console.log(JSON.stringify(kudos, null, 4));
       this.setState({ kudos });
     });
+  }
+
+  componentDidMount() {
+    this.findKudos();
   }
 
   render() {
     return (
       <div>
         <KudosListPresentational kudos={this.state.kudos} />
-        <KudoFormContainer />
+        <KudoFormContainer findKudos={this.findKudos} />
       </div>
     );
   }
