@@ -23,6 +23,11 @@ class KudosListPage extends Component {
     });
   }
 
+  onKudoDeleteClick = (kudoId) => {
+    new KudosService().deleteKudo(kudoId)
+      .then(this.findKudos);
+  }
+
   componentDidMount() {
     this.findKudos();
   }
@@ -30,7 +35,10 @@ class KudosListPage extends Component {
   render() {
     return (
       <div>
-        <KudosListPresentational kudos={this.state.kudos} />
+        <KudosListPresentational
+          kudos={this.state.kudos}
+          onKudoDeleteClick={this.onKudoDeleteClick}
+        />
         <KudoFormContainer findKudos={this.findKudos} />
       </div>
     );

@@ -26,4 +26,15 @@ export default class KudosService {
        });
     })
   }
+
+  deleteKudo(kudoId) {
+    return new Promise((resolve, reject) => {
+      superagent
+       .del(`/api/kudos/${kudoId}`)
+       .end(function(err, res) {
+         if (err) return reject(err);
+         resolve(res.body);
+       });
+    });
+  }
 }

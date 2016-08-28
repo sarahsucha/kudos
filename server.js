@@ -37,6 +37,7 @@ app.get('/kudos', renderMainTemplate); // renderMainTemplate is called middlewar
 // ROUTES FOR JSON
 app.get('/api/kudos', kudosController.findKudos);
 app.post('/api/kudos', kudosController.createKudo);
+app.delete('/api/kudos/:kudo_id', kudosController.removeKudo);
 
 // LISTEN FOR A PORT
 app.listen(9393);

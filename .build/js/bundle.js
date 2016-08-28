@@ -27249,6 +27249,10 @@
 	      });
 	    };
 
+	    _this.onKudoDeleteClick = function (kudoId) {
+	      new _KudosService2.default().deleteKudo(kudoId).then(_this.findKudos);
+	    };
+
 	    _this.state = {
 	      kudos: []
 	    };
@@ -27266,7 +27270,10 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_KudosListPresentational2.default, { kudos: this.state.kudos }),
+	        _react2.default.createElement(_KudosListPresentational2.default, {
+	          kudos: this.state.kudos,
+	          onKudoDeleteClick: this.onKudoDeleteClick
+	        }),
 	        _react2.default.createElement(_KudoFormContainer2.default, { findKudos: this.findKudos })
 	      );
 	    }
@@ -27446,6 +27453,16 @@
 
 	      return new Promise(function (resolve, reject) {
 	        _superagent2.default.get('/api/kudos').query(searchParams).set('Accept', 'application/json').end(function (err, res) {
+	          if (err) return reject(err);
+	          resolve(res.body);
+	        });
+	      });
+	    }
+	  }, {
+	    key: 'deleteKudo',
+	    value: function deleteKudo(kudoId) {
+	      return new Promise(function (resolve, reject) {
+	        _superagent2.default.del('/api/kudos/' + kudoId).end(function (err, res) {
 	          if (err) return reject(err);
 	          resolve(res.body);
 	        });
@@ -29037,7 +29054,10 @@
 
 	//don't need Component because in presentation use stateless function componenets. which only return uah html and is equivalent of the render function in react componenets
 
-	var KudosListPresentational = function KudosListPresentational(props) {
+	var KudosListPresentational = function KudosListPresentational(_ref) {
+	  var onKudoDeleteClick = _ref.onKudoDeleteClick;
+	  var kudos = _ref.kudos;
+
 	  return _react2.default.createElement(
 	    "div",
 	    { className: "main", id: "latestKudos" },
@@ -29046,18 +29066,26 @@
 	      null,
 	      "latest kudos"
 	    ),
-	    _react2.default.createElement(
-	      "ul",
-	      null,
-	      props.kudos.map(function (kudo, key) {
-	        return _react2.default.createElement(
-	          "li",
-	          { key: key },
-	          kudo.description
-	        );
-	      })
-	    )
+	    kudos.map(function (kudo, key) {
+	      return _react2.default.createElement(
+	        "div",
+	        { key: key, className: "kudo" },
+	        kudo.description,
+	        _react2.default.createElement(
+	          "button",
+	          { onClick: function onClick() {
+	              onKudoDeleteClick(kudo.kudo_id);
+	            } },
+	          "Delete"
+	        )
+	      );
+	    })
 	  );
+	};
+
+	KudosListPresentational.propTypes = {
+	  onKudoDeleteClick: _react.PropTypes.func.isRequired,
+	  kudos: _react.PropTypes.array.isRequired
 	};
 
 	exports.default = KudosListPresentational;

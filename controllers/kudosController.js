@@ -18,6 +18,15 @@ class KudosController {
       next(err);
     }
   }
+
+  async removeKudo(req, res, next) {
+    try {
+      const kudo = await new KudosService().removeKudo(req.params.kudo_id);
+      res.status(200).send();
+    } catch (err) {
+      next(err);
+    }
+  }
 };
 
 module.exports = new KudosController();
