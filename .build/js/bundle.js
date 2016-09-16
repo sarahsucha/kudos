@@ -27316,6 +27316,7 @@
 	      e.preventDefault();
 
 	      // Takes the actual state (kudo form) and sends it to the server.
+	      // instead of using then with promises, use async / await
 	      _this.kudosService.postKudo(_this.state).then(function (kudo) {
 	        findKudos(); // Refreshes kudos after a new kudo was added.
 	      });
@@ -27361,15 +27362,15 @@
 	        _react2.default.createElement(
 	          'h2',
 	          null,
-	          'add a description'
+	          'add a kudo'
 	        ),
 	        _react2.default.createElement(
 	          'form',
-	          { action: '/api/kudos', method: 'POST', onSubmit: this.handleSubmit },
+	          { className: '', action: '/api/kudos', method: 'POST', onSubmit: this.handleSubmit },
 	          _react2.default.createElement(
 	            'label',
 	            { htmlFor: 'name_from' },
-	            'From:'
+	            'from:'
 	          ),
 	          _react2.default.createElement('input', { type: 'text', name: 'name_from', id: 'name_from', required: true, value: name_from,
 	            onChange: function onChange(e) {
@@ -27378,7 +27379,7 @@
 	          _react2.default.createElement(
 	            'label',
 	            { htmlFor: 'name_to' },
-	            'To:'
+	            'to:'
 	          ),
 	          _react2.default.createElement('input', { type: 'text', name: 'name_to', id: 'name_to', required: true, value: name_to,
 	            onChange: function onChange(e) {
@@ -27387,13 +27388,13 @@
 	          _react2.default.createElement(
 	            'label',
 	            { htmlFor: 'description' },
-	            'Kudo:'
+	            'kudo:'
 	          ),
-	          _react2.default.createElement('textarea', { name: 'description', id: 'description', required: true, value: description,
+	          _react2.default.createElement('textarea', { rows: 5, cols: 22, name: 'description', id: 'description', required: true, value: description,
 	            onChange: function onChange(e) {
 	              _this2.setState({ description: e.target.value });
 	            } }),
-	          _react2.default.createElement('input', { type: 'submit', value: 'Save' })
+	          _react2.default.createElement('input', { className: 'top10 button', type: 'submit', value: 'Save' })
 	        )
 	      );
 	    }

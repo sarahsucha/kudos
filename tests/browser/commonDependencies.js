@@ -1,4 +1,7 @@
+// an assertion library
 import chai from 'chai';
+
+// chai ezyme library gives more assertions for enzyme
 import chaiEnzyme from 'chai-enzyme';
 
 export React from 'react';

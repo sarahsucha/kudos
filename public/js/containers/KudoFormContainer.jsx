@@ -22,6 +22,7 @@ class KudoFormContainer extends Component {
     e.preventDefault();
 
     // Takes the actual state (kudo form) and sends it to the server.
+    // instead of using then with promises, use async / await
     this.kudosService.postKudo(this.state)
       .then((kudo) => {
         findKudos(); // Refreshes kudos after a new kudo was added.
@@ -45,21 +46,21 @@ class KudoFormContainer extends Component {
 
     return (
       <div className="main newKudo" id="newKudoForm">
-        <h2>add a description</h2>
-        <form action="/api/kudos" method="POST" onSubmit={this.handleSubmit}>
-          <label htmlFor="name_from">From:</label>
+        <h2>add a kudo</h2>
+        <form className="" action="/api/kudos" method="POST" onSubmit={this.handleSubmit}>
+          <label htmlFor="name_from">from:</label>
           <input type="text" name="name_from" id="name_from" required value={name_from}
             onChange={(e) => { this.setState({name_from: e.target.value})}} />
 
-          <label htmlFor="name_to">To:</label>
+          <label htmlFor="name_to">to:</label>
           <input type="text" name="name_to" id="name_to" required value={name_to}
             onChange={(e) => { this.setState({name_to: e.target.value})}} />
 
-          <label htmlFor="description">Kudo:</label>
-          <textarea name="description" id="description" required value={description}
+          <label htmlFor="description">kudo:</label>
+          <textarea rows={5} cols={22} name="description" id="description" required value={description}
             onChange={(e) => { this.setState({description: e.target.value})}} />
 
-          <input type="submit" value="Save" />
+          <input className="top10 button" type="submit" value="Save" />
         </form>
       </div>
     );

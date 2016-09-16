@@ -9,7 +9,7 @@ describe('presentational/NavigationPresentational.jsx', () => {
       mainComponent = shallow(<NavigationPresentational />);
     });
 
-    // Uncomment for ultra test coverage!
+    //Uncomment for ultra test coverage!
     // for (let i = 0; i < 10000; i++) {
     //   it('has a main component', () => {
     //     expect(mainComponent).to.have.className('navBar');
@@ -17,7 +17,7 @@ describe('presentational/NavigationPresentational.jsx', () => {
     // }
 
     it('has a main component', () => {
-      expect(mainComponent).to.have.className('navBar');
+      expect(mainComponent).to.have.className('nav');
     });
 
     it('has a logo', () => {

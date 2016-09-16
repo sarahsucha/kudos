@@ -3,6 +3,9 @@
 $color1: #E84545;
 $color2: #53354A;
 $color3: #903749;*/
+* {
+  font-family: 'Open Sans', sans-serif;
+}
 
 body {
   font-family: 'Open Sans', sans-serif;
@@ -13,9 +16,9 @@ body {
 
 h2 {
   font-family: 'BioRhyme', serif;
-  font-size: 2em;
+  font-size: 1.5em;
   color: #53354A;
-  padding: 1em 0;
+  /*padding: 1em 0;*/
 
 }
 
@@ -75,6 +78,45 @@ nav a:hover {
   display: none;
 }
 
+#newKudoForm label {
+  font-size: 1em;
+  font-weight: bold;
+  color: #53354A;
+}
+
+#newKudoForm input {
+  display: block;
+  border-radius: 3px;
+  border: 0;
+  font-size: .8em;
+  color: #53354A;
+}
+
+.top10 {
+  margin-top: 10px;
+}
+
+#newKudoForm input.button {
+  background-color: #53354A;
+  color: #fff;
+}
+
+#newKudoForm input.button:hover {
+  background-color: #903749;
+}
+
+#newKudoForm:focus {
+  /*border-color: #903749;*/
+  outline: none;
+  box-shadow: 0 0 10px #903749;
+}
+
+#newKudoForm textarea {
+  display: block;
+  border-radius: 3px;
+  border: 0;
+}
+
 @media (max-width: 768px) {
   .main {
     width: 90%;
@@ -100,7 +142,7 @@ nav a:hover {
     width: 100%;
     color: #E84545;
     display: block;
-    font-size: 1.5em;
+    font-size: 1.2em;
     padding: 1em 0;
     -webkit-font-smoothing: antialiased;
     /* to stop flickering of text in safari */
