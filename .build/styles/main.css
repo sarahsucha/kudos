@@ -1,0 +1,293 @@
+
+/*
+$color1: #E84545;
+$color2: #53354A;
+$color3: #903749;*/
+* {
+  font-family: 'Open Sans', sans-serif;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  line-height: 2em;
+  background-color: #E84545;
+  margin: 0;
+}
+
+h2 {
+  font-family: 'BioRhyme', serif;
+  font-size: 1.5em;
+  color: #53354A;
+  /*padding: 1em 0;*/
+
+}
+
+.main {
+  padding-top: 50px;
+  margin: 0 auto;
+  max-width: 960px;
+  width: 90%;
+}
+
+nav .wrapper {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+nav ul {
+  display: flex;
+  justify-content: space-between;
+  list-style-type: none;
+  width: 50%;
+}
+
+nav a {
+  color: #E84545;
+  text-decoration: none;
+  transition: all .5s ease;
+}
+
+nav a:hover {
+  color: #903749;
+}
+
+.wrapper {
+  margin: 0 auto;
+  max-width: 960px;
+  padding: 0 2%;
+}
+
+.navBar {
+  background-color: #53354A;
+  position: fixed;
+  min-width: 100%;
+}
+
+.logo {
+  color: #E84545;
+  font-family: 'BioRhyme', serif;
+  font-size: 3em;
+}
+
+#menu-toggle {
+  display: none;
+}
+
+.label-toggle {
+  display: none;
+}
+
+#newKudoForm label {
+  font-size: 1em;
+  font-weight: bold;
+  color: #53354A;
+}
+
+#newKudoForm input {
+  display: block;
+  border-radius: 3px;
+  border: 0;
+  font-size: .8em;
+  color: #53354A;
+}
+
+.top10 {
+  margin-top: 10px;
+}
+
+#newKudoForm input.button {
+  background-color: #53354A;
+  color: #fff;
+}
+
+#newKudoForm input.button:hover {
+  background-color: #903749;
+}
+
+#newKudoForm:focus {
+  /*border-color: #903749;*/
+  outline: none;
+  box-shadow: 0 0 10px #903749;
+}
+
+#newKudoForm textarea {
+  display: block;
+  border-radius: 3px;
+  border: 0;
+}
+
+@media (max-width: 768px) {
+  .main {
+    width: 90%;
+  }
+  ul {
+    position: relative;
+    top: 0px;
+    left: -25px;
+    width: 90%;
+    background-color: #E84545;
+    display: block;
+    list-style-type: none;
+    opacity: 0;
+    text-align: center;
+    transition: all ls ease;
+  }
+
+  li {
+    position: absolute;
+    left: 0;
+    background: #53354A;
+    border-bottom: 2px solid #53354A;
+    width: 100%;
+    color: #E84545;
+    display: block;
+    font-size: 1.2em;
+    padding: 1em 0;
+    -webkit-font-smoothing: antialiased;
+    /* to stop flickering of text in safari */
+    transform-origin: 0% 0%;
+    /*transform: translate(-100%, 0);
+
+    transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);*/
+  }
+  #menu-toggle:checked ~ ul {
+    opacity: 1;
+    /*height: 100vh;*/
+    visibility: visible;
+  }
+
+  .label-toggle {
+    /*background: linear-gradient(to bottom, #E84545 0%, #E84545 20%, transparent 20%, transparent 40%, #E84545 40%, #E84545 60%, transparent 60%, transparent 80%, #E84545 80%, #E84545 100%); //Gradient Hamburger*/
+    cursor: pointer;
+    display: block;
+    float: right;
+    height: 35px;
+    margin-top: 1em;
+    width: 35px;
+  }
+  .logo {
+    display: none;
+  }
+
+  #menuToggle
+  {
+    display: block;
+    position: relative;
+    top: 20px;
+    left: 20px;
+
+    z-index: 1;
+
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  #menuToggle input
+  {
+    display: block;
+    width: 40px;
+    height: 32px;
+    position: absolute;
+    top: -7px;
+    left: -5px;
+
+    cursor: pointer;
+
+    opacity: 0; /* hide this */
+    z-index: 1; /* and place it over the hamburger */
+
+    -webkit-touch-callout: none;
+  }
+
+  /*
+   * Just a quick hamburger
+   */
+  #menuToggle span
+  {
+    display: block;
+    width: 33px;
+    height: 4px;
+    margin-bottom: 5px;
+    position: relative;
+
+    background: #E84545;
+    border-radius: 3px;
+
+    z-index: 1;
+
+    transform-origin: 4px 0px;
+
+    transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+                background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+                opacity 0.55s ease;
+  }
+
+  #menuToggle span:first-child
+  {
+    transform-origin: 0% 0%;
+  }
+
+  #menuToggle span:nth-last-child(2)
+  {
+    transform-origin: 0% 100%;
+  }
+
+  /*
+   * Transform all the slices of hamburger
+   * into a crossmark.
+   */
+  #menuToggle input:checked ~ span
+  {
+    opacity: 1;
+    transform: rotate(45deg) translate(-2px, -1px);
+    background: #E84545;
+  }
+
+  /*
+   * But let's hide the middle one.
+   */
+  #menuToggle input:checked ~ span:nth-last-child(3)
+  {
+    opacity: 0;
+    transform: rotate(0deg) scale(0.2, 0.2);
+  }
+
+  /*
+   * Ohyeah and the last one should go the other direction
+   */
+  #menuToggle input:checked ~ span:nth-last-child(2)
+  {
+    opacity: 1;
+    transform: rotate(-45deg) translate(0, -1px);
+  }
+
+  /*
+   * Make this absolute positioned
+   * at the top left of the screen
+   */
+  #menu
+  {
+    position: absolute;
+    width: 300px;
+    margin: -100px 0 0 -50px;
+    padding: 50px;
+    padding-top: 125px;
+
+    background: #ededed;
+    list-style-type: none;
+    -webkit-font-smoothing: antialiased;
+    /* to stop flickering of text in safari */
+
+    transform-origin: 0% 0%;
+    transform: translate(-100%, 0);
+
+    transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+  }
+
+  #menuToggle input:checked ~ ul
+  {
+    transform: scale(1.0, 1.0);
+    opacity: 1;
+  }
+}
